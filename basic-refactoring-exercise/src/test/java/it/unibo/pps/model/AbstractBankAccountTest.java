@@ -65,10 +65,8 @@ public abstract class AbstractBankAccountTest {
 
     @Test
     void testShouldNotWithdrawIfNotEnoughMoney() {
-        final double wrongDepositAmount = DEPOSIT_AMOUNT + 1.0;
-        bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
-        bankAccount.withdraw(accountHolder.id(), wrongDepositAmount);
-        assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
+        bankAccount.withdraw(accountHolder.id(), WITHDRAWAL_AMOUNT);
+        assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
     }
 
     @Test
