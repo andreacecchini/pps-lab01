@@ -9,16 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SimpleBankAccountTest {
 
-    private static final int INITIAL_BALANCE = 0;
-    private static final int DEPOSIT_AMOUNT = 100;
-    private static final int WITHDRAWAL_AMOUNT = 70;
-    private static final int NEGATIVE_AMOUNT = -1;
-    private static final String ACCOUNT_HOLDER_NAME = "Mario";
-    private static final String ACCOUNT_HOLDER_SURNAME = "Rossi";
-    private static final int ACCOUNT_HOLDER_ID = 1;
-    private static final int WRONG_ACCOUNT_HOLDER_ID = 2;
-    private AccountHolder accountHolder;
-    private BankAccount bankAccount;
+    protected static final int INITIAL_BALANCE = 0;
+    protected static final int DEPOSIT_AMOUNT = 100;
+    protected static final int WITHDRAWAL_AMOUNT = 70;
+    protected static final int NEGATIVE_AMOUNT = -1;
+    protected static final String ACCOUNT_HOLDER_NAME = "Mario";
+    protected static final String ACCOUNT_HOLDER_SURNAME = "Rossi";
+    protected static final int ACCOUNT_HOLDER_ID = 1;
+    protected static final int WRONG_ACCOUNT_HOLDER_ID = 2;
+    protected AccountHolder accountHolder;
+    protected BankAccount bankAccount;
 
     @BeforeEach
     void beforeEach() {
