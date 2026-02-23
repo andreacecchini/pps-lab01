@@ -37,7 +37,7 @@ class SimpleBankAccountTest {
     }
 
     @Test
-    void testWrongDeposit() {
+    void testShouldNotDepositWithWrongId() {
         final double wrongDepositAmount = 50.0;
         bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
         bankAccount.deposit(WRONG_ACCOUNT_HOLDER_ID, wrongDepositAmount);
@@ -52,7 +52,7 @@ class SimpleBankAccountTest {
     }
 
     @Test
-    void testWrongWithdraw() {
+    void testShouldNotWithdrawWithWrongId() {
         bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
         bankAccount.withdraw(WRONG_ACCOUNT_HOLDER_ID, WITHDRAWAL_AMOUNT);
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
