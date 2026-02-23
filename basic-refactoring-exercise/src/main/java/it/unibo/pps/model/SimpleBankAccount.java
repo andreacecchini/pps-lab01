@@ -35,7 +35,7 @@ public class SimpleBankAccount implements BankAccount {
     }
 
     private boolean isWithdrawAllowed(final double amount){
-        return this.balance >= amount;
+        return amount > 0 && this.balance >= amount;
     }
 
     private boolean checkUser(final int id) {

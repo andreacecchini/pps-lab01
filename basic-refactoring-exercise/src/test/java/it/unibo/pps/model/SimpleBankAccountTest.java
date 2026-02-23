@@ -72,4 +72,10 @@ class SimpleBankAccountTest {
         bankAccount.withdraw(accountHolder.id(), wrongDepositAmount);
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
     }
+
+    @Test
+    void testShouldNotBePossibleToWithdrawANegativeAmount() {
+        bankAccount.withdraw(accountHolder.id(), NEGATIVE_AMOUNT);
+        assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
+    }
 }
