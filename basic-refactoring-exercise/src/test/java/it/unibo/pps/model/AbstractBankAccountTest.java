@@ -10,6 +10,7 @@ public abstract class AbstractBankAccountTest {
     protected static final int DEPOSIT_AMOUNT = 100;
     protected static final int WITHDRAWAL_AMOUNT = 70;
     protected static final int NEGATIVE_AMOUNT = -1;
+    protected static final double NULL_AMOUNT = 0;
     protected static final String ACCOUNT_HOLDER_NAME = "Mario";
     protected static final String ACCOUNT_HOLDER_SURNAME = "Rossi";
     protected static final int ACCOUNT_HOLDER_ID = 1;

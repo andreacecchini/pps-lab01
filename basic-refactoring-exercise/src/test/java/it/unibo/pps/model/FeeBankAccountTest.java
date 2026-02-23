@@ -30,7 +30,7 @@ public class FeeBankAccountTest extends AbstractBankAccountTest {
     @Test
     void testFeeShouldNotBePaidIfNullAmountIsWithdrew() {
         this.bankAccount.deposit(this.accountHolder.id(), DEPOSIT_AMOUNT);
-        this.bankAccount.withdraw(this.accountHolder.id(), 0);
+        this.bankAccount.withdraw(this.accountHolder.id(), NULL_AMOUNT);
         assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
     }
 }
