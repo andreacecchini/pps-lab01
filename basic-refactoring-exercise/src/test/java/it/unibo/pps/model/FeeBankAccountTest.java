@@ -19,4 +19,18 @@ public class FeeBankAccountTest extends AbstractBankAccountTest {
         this.bankAccount.withdraw(this.accountHolder.id(), WITHDRAWAL_AMOUNT);
         assertEquals(DEPOSIT_AMOUNT - WITHDRAWAL_AMOUNT - WITHDRAWAL_FEE, this.bankAccount.getBalance());
     }
+
+    @Test
+    void testShouldNotBePossibleToWithdrawIfNotEnoughMoneyToPayFee() {
+        this.bankAccount.deposit(this.accountHolder.id(), DEPOSIT_AMOUNT);
+        this.bankAccount.withdraw(this.accountHolder.id(), DEPOSIT_AMOUNT);
+        assertEquals(DEPOSIT_AMOUNT,  this.bankAccount.getBalance());
+    }
+
+    @Test
+    void testFeeShouldNotBePaidIfNullAmountIsWithdrew() {
+        this.bankAccount.deposit(this.accountHolder.id(), DEPOSIT_AMOUNT);
+        this.bankAccount.withdraw(this.accountHolder.id(), 0);
+        assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
+    }
 }
