@@ -2,9 +2,11 @@ package it.unibo.pps.model;
 
 public class FeeBankAccount implements BankAccount {
     private final BankAccount bankAccount;
+    private final double withdrawalFee;
 
     public FeeBankAccount(BankAccount bankAccount, double withdrawalFee) {
         this.bankAccount = bankAccount;
+        this.withdrawalFee = withdrawalFee;
     }
 
     @Override
@@ -19,6 +21,6 @@ public class FeeBankAccount implements BankAccount {
 
     @Override
     public void withdraw(int userID, double amount) {
-        this.bankAccount.withdraw(userID, amount);
+        this.bankAccount.withdraw(userID, amount + this.withdrawalFee);
     }
 }
