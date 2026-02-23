@@ -22,7 +22,7 @@ public class SimpleBankAccount implements BankAccount {
 
     @Override
     public void deposit(final int userID, final double amount) {
-        if (checkUser(userID) && amount > 0) {
+        if (checkUser(userID) && isDepositAllowed(amount)) {
             this.balance += amount;
         }
     }
@@ -32,6 +32,10 @@ public class SimpleBankAccount implements BankAccount {
         if (checkUser(userID) && isWithdrawAllowed(amount)) {
             this.balance -= amount;
         }
+    }
+
+    private boolean isDepositAllowed(double amount) {
+        return amount > 0;
     }
 
     private boolean isWithdrawAllowed(final double amount){
