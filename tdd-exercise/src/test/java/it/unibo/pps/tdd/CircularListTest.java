@@ -1,4 +1,4 @@
-package tdd;
+package it.unibo.pps.tdd;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package tdd;
+package it.unibo.pps.tdd;
 
 /**
  * Task 1 - TDD for Smart Door Lock

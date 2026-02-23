@@ -1,8 +1,8 @@
-package example;
+package it.unibo.pps;
 
-import example.model.AccountHolder;
-import example.model.BankAccount;
-import example.model.SimpleBankAccount;
+import it.unibo.pps.model.AccountHolder;
+import it.unibo.pps.model.BankAccount;
+import it.unibo.pps.model.SimpleBankAccount;
 
 public class Main {
 

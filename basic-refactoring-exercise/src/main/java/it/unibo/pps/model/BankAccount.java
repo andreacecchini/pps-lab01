@@ -1,4 +1,4 @@
-package example.model;
+package it.unibo.pps.model;
 
 /**
  * This interface defines the concept of a very basic bank account.

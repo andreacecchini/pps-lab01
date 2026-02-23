@@ -1,4 +1,4 @@
-package example.model;
+package it.unibo.pps.model;
 
 /**
  * This class represents the account holder concept.

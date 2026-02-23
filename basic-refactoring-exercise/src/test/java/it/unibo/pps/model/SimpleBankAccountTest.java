@@ -1,6 +1,4 @@
-import example.model.AccountHolder;
-import example.model.BankAccount;
-import example.model.SimpleBankAccount;
+package it.unibo.pps.model;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
