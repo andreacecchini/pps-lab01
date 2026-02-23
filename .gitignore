@@ -74,4 +74,10 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+### IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
 # End of https://www.toptal.com/developers/gitignore/api/gradle,visualstudiocode,java
