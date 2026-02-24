@@ -39,6 +39,14 @@ public class SmartDoorLockTest {
         assertEquals(0, this.smartDoorLockUnderTest.getFailedAttempts());
     }
 
+    @Test
+    void testShouldBePossibleToUnlockWithTheRightPin() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.lock();
+        this.smartDoorLockUnderTest.unlock(PIN);
+        assertIsOpen();
+    }
+    
     private void assertIsOpen() {
         assertFalse(this.smartDoorLockUnderTest.isLocked());
         assertFalse(this.smartDoorLockUnderTest.isBlocked());
