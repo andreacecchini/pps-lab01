@@ -20,7 +20,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void setPin(int pin) {
-        this.pin = Optional.ofNullable(pin);
+        this.pin = Optional.of(pin);
     }
 
     @Override
