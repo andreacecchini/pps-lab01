@@ -25,7 +25,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public void unlock(int pin) {
-        if (this.pin.isPresent()) {
+        if (isUnlockingAllowed()) {
             if (this.pin.get() == pin) {
                 this.state = SmartDoorState.UNLOCKED;
             } else {
@@ -33,6 +33,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
             }
         }
     }
+
 
     @Override
     public void lock() {
@@ -72,5 +73,9 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
         if (this.numberOfAttempts == this.maxNumberOfAttempts) {
             this.state = SmartDoorState.BLOCKED;
         }
+    }
+
+    private boolean isUnlockingAllowed() {
+        return this.state == SmartDoorState.LOCKED && this.pin.isPresent();
     }
 }

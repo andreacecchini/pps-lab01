@@ -78,6 +78,16 @@ public class SmartDoorLockTest {
     }
 
     @Test
+    void testShouldNotBePossibleToAttemptIfBlocked() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.lock();
+        for (int i = 1; i <= MAX_ATTEMPTS; i++) {
+            this.smartDoorLockUnderTest.unlock(WRONG_PIN);
+        }
+        this.smartDoorLockUnderTest.unlock(PIN);
+        assertTrue(this.smartDoorLockUnderTest.isBlocked());
+    }
+    @Test
     void testShouldBeOpenAfterResetWhenBlocked() {
         this.smartDoorLockUnderTest.setPin(PIN);
         this.smartDoorLockUnderTest.lock();
