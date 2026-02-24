@@ -24,12 +24,6 @@ public class SmartDoorLockWithMaxAttemptsTest extends SmartDoorLockTest {
         assertEquals(MAX_ATTEMPTS, this.smartDoorLockUnderTest.getMaxAttempts());
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1, 12, 123, 1234567, -123, -1234})
-    void testPinShouldThrowExceptionForInvalidLength(int wrongLengthPin) {
-        assertThrows(IllegalArgumentException.class,
-                () -> this.smartDoorLockUnderTest.setPin(wrongLengthPin));
-    }
 
     @Test
     void testAttemptsShouldBeZeroAfterLock() {
