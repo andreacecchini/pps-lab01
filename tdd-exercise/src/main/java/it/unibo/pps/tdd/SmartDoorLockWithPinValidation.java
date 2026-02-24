@@ -1,9 +1,9 @@
 package it.unibo.pps.tdd;
 
-public final class SmartDoorLockWithPinValidation extends SmartDoorLockDecorator {
+final class SmartDoorLockWithPinValidation extends SmartDoorLockDecorator {
     private final PinValidator pinValidator;
 
-    public SmartDoorLockWithPinValidation(SmartDoorLock wrapped, PinValidator pinValidator) {
+    SmartDoorLockWithPinValidation(SmartDoorLock wrapped, PinValidator pinValidator) {
         super(wrapped);
         this.pinValidator = pinValidator;
     }

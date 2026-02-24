@@ -1,9 +1,13 @@
 package it.unibo.pps.tdd;
 
-public final class BasicSmartDoorLock implements SmartDoorLock {
+final class BasicSmartDoorLock implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private boolean isPinSet = false;
     private int pin;
+
+    BasicSmartDoorLock() {
+
+    }
 
     @Override
     public void setPin(int pin) {

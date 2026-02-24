@@ -3,12 +3,12 @@ package it.unibo.pps.tdd;
 /**
  * A {@link SmartDoorLock} with a maximum number of attempts.
  */
-public final class SmartDoorWithMaxAttempts extends SmartDoorLockDecorator {
+final class SmartDoorWithMaxAttempts extends SmartDoorLockDecorator {
     private boolean isBlocked = false;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
 
-    public SmartDoorWithMaxAttempts(SmartDoorLock wrapped, int maxNumberOfAttempts) {
+    SmartDoorWithMaxAttempts(SmartDoorLock wrapped, int maxNumberOfAttempts) {
         super(wrapped);
         this.maxNumberOfAttempts = maxNumberOfAttempts;
     }
