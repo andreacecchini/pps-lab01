@@ -2,6 +2,9 @@ package it.unibo.pps.tdd;
 
 import java.util.Optional;
 
+/**
+ * A {@link SmartDoorLock} with a maximum number of attempts.
+ */
 public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     private static final int MAX_PIN_LENGTH = 4;
     private SmartDoorState state = SmartDoorState.UNLOCKED;
