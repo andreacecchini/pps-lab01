@@ -13,7 +13,7 @@ public class SmartDoorLockTest {
 
     @BeforeEach
     void beforeEach() {
-        this.smartDoorLockUnderTest = new SmartDoorLockImpl(MAX_ATTEMPTS);
+        this.smartDoorLockUnderTest = new SmartDoorWithMaxAttempts(MAX_ATTEMPTS);
     }
 
     @Test

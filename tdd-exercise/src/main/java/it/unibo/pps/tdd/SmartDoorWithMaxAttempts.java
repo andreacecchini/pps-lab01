@@ -2,13 +2,13 @@ package it.unibo.pps.tdd;
 
 import java.util.Optional;
 
-public class SmartDoorLockImpl implements SmartDoorLock {
+public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private Optional<Integer> pin;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
 
-    public SmartDoorLockImpl(int maxNumberOfAttempts) {
+    public SmartDoorWithMaxAttempts(int maxNumberOfAttempts) {
         this.maxNumberOfAttempts = maxNumberOfAttempts;
     }
 
