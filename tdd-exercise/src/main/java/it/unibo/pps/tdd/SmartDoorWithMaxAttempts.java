@@ -59,7 +59,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public int getMaxAttempts() {
-        return 0;
+        return this.maxNumberOfAttempts;
     }
 
     @Override

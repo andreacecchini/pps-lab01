@@ -19,6 +19,11 @@ public class SmartDoorLockTest {
     }
 
     @Test
+    void testMaxNumberOfAttemptsShouldCorrectlySet() {
+        assertEquals(MAX_ATTEMPTS, this.smartDoorLockUnderTest.getMaxAttempts());
+    }
+
+    @Test
     void testShouldBeOpenAfterInitialization() {
         assertIsOpen();
     }
