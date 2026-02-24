@@ -7,11 +7,11 @@ import java.util.Optional;
  */
 public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
-    private int pin;
     private boolean isPinSet = false;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
     private final PinValidator pinValidator;
+    private int pin;
 
     public SmartDoorWithMaxAttempts(int maxNumberOfAttempts, PinValidator pinValidator) {
         this.maxNumberOfAttempts = maxNumberOfAttempts;
