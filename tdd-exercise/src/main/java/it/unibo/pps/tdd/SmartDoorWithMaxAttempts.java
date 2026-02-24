@@ -8,7 +8,8 @@ import java.util.Optional;
 public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     private static final int MAX_PIN_LENGTH = 4;
     private SmartDoorState state = SmartDoorState.UNLOCKED;
-    private Optional<Integer> pin;
+    private int pin;
+    private boolean isPinSet = false;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
 
@@ -26,18 +27,18 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     public void setPin(int pin) {
         if (this.state == SmartDoorState.UNLOCKED) {
             if (!hasRightLength(pin)) {
-                throw new IllegalArgumentException("Invalid pin: should have 4 digits.");
+                throw new IllegalArgumentException();
             }
-            this.pin = Optional.of(pin);
+            this.pin = pin;
+            this.isPinSet = true;
         }
     }
 
     @Override
     public void unlock(int pin) {
         if (isUnlockingAllowed()) {
-            if (this.pin.get() == pin) {
-                this.state = SmartDoorState.UNLOCKED;
-                this.numberOfAttempts = 0;
+            if (this.pin == pin) {
+                unlockSmartDoor();
             } else {
                 increaseNumberOfAttempts();
             }
@@ -46,9 +47,11 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public void lock() {
-        this.state = this.pin
-                .map(_ -> SmartDoorState.LOCKED)
-                .orElseThrow(IllegalStateException::new);
+        if (this.isPinSet) {
+            this.state = SmartDoorState.LOCKED;
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
@@ -73,9 +76,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public void reset() {
-        this.state = SmartDoorState.UNLOCKED;
-        this.pin = Optional.empty();
-        this.numberOfAttempts = 0;
+        unlockSmartDoor();
     }
 
     private void increaseNumberOfAttempts() {
@@ -86,10 +87,16 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     }
 
     private boolean isUnlockingAllowed() {
-        return this.state == SmartDoorState.LOCKED && this.pin.isPresent();
+        return this.state == SmartDoorState.LOCKED;
     }
 
     private boolean hasRightLength(int pin) {
         return pin >= Math.powExact(10, MAX_PIN_LENGTH - 1) && pin <= Math.powExact(10, MAX_PIN_LENGTH) - 1;
+    }
+
+    private void unlockSmartDoor() {
+        this.state = SmartDoorState.UNLOCKED;
+        this.isPinSet = false;
+        this.numberOfAttempts = 0;
     }
 }
