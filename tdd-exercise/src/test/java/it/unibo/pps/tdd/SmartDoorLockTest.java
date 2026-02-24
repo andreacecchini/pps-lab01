@@ -25,6 +25,13 @@ public class SmartDoorLockTest {
         assertIsOpen();
     }
 
+    @Test
+    void testShouldBePossibleToLockAfterPinIsSetted() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        assertDoesNotThrow(() -> this.smartDoorLockUnderTest.lock());
+        assertTrue(this.smartDoorLockUnderTest.isLocked());
+    }
+
     private void assertIsOpen() {
         assertFalse(this.smartDoorLockUnderTest.isLocked());
         assertFalse(this.smartDoorLockUnderTest.isBlocked());

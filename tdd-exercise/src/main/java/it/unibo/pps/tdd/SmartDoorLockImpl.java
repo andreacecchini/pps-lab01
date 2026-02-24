@@ -1,6 +1,14 @@
 package it.unibo.pps.tdd;
 
 public class SmartDoorLockImpl implements SmartDoorLock {
+    private SmartDoorState state = SmartDoorState.UNLOCKED;
+
+    private enum SmartDoorState {
+        UNLOCKED,
+        LOCKED,
+        BLOCKED,
+    }
+
     @Override
     public void setPin(int pin) {
 
@@ -13,12 +21,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void lock() {
-
+        this.state = SmartDoorState.LOCKED;
     }
 
     @Override
     public boolean isLocked() {
-        return false;
+        return this.state == SmartDoorState.LOCKED;
     }
 
     @Override
