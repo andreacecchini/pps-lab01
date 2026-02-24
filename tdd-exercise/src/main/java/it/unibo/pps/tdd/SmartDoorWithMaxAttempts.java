@@ -87,6 +87,6 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     }
 
     private boolean hasRightLength(int pin) {
-        return pin >= 1000 && pin <= 9999;
+        return pin >= Math.powExact(10, MAX_PIN_LENGTH - 1) && pin <= Math.powExact(10, MAX_PIN_LENGTH) - 1;
     }
 }
