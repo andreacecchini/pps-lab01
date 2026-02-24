@@ -4,6 +4,11 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private int pin;
     private int numberOfAttempts = 0;
+    private final int maxNumberOfAttempts;
+
+    public SmartDoorLockImpl(int maxNumberOfAttempts) {
+        this.maxNumberOfAttempts = maxNumberOfAttempts;
+    }
 
     private enum SmartDoorState {
         UNLOCKED,
@@ -21,7 +26,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
         if (this.pin == pin) {
             this.state = SmartDoorState.UNLOCKED;
         } else {
-            this.numberOfAttempts++;
+            increaseNumberOfAttempts();
         }
     }
 
@@ -37,7 +42,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public boolean isBlocked() {
-        return false;
+        return this.state == SmartDoorState.BLOCKED;
     }
 
     @Override
@@ -53,5 +58,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     @Override
     public void reset() {
 
+    }
+
+    private void increaseNumberOfAttempts() {
+        this.numberOfAttempts++;
+        if (this.numberOfAttempts == this.maxNumberOfAttempts) {
+            this.state = SmartDoorState.BLOCKED;
+        }
     }
 }
