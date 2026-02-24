@@ -35,7 +35,7 @@ public class SmartDoorLockTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 12, 123, 1234567, -1234})
+    @ValueSource(ints = {0, 1, 12, 123, 1234567, -123, -1234})
     void testPinShouldThrowExceptionForInvalidLength(int wrongLengthPin) {
         assertThrows(IllegalArgumentException.class,
                 () -> this.smartDoorLockUnderTest.setPin(wrongLengthPin));
