@@ -77,6 +77,24 @@ public class SmartDoorLockTest {
         assertTrue(this.smartDoorLockUnderTest.isBlocked());
     }
 
+    @Test
+    void testShouldBeOpenAfterResetWhenBlocked() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.lock();
+        for (int i = 1; i <= MAX_ATTEMPTS; i++) {
+            this.smartDoorLockUnderTest.unlock(WRONG_PIN);
+        }
+        this.smartDoorLockUnderTest.reset();
+        assertIsOpen();
+    }
+
+    @Test
+    void testPinShouldNotBeSetAfterReset() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.reset();
+        assertThrows(IllegalStateException.class, () -> this.smartDoorLockUnderTest.lock());
+    }
+
     private void assertIsOpen() {
         assertFalse(this.smartDoorLockUnderTest.isLocked());
         assertFalse(this.smartDoorLockUnderTest.isBlocked());
