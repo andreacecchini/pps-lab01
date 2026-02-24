@@ -1,14 +1,20 @@
 package it.unibo.pps.tdd;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
+    private SmartDoorLock smartDoorLockUnderTest;
+
+    @BeforeEach
+    void beforeEach() {
+        this.smartDoorLockUnderTest = new SmartDoorLockImpl();
+    }
     @Test
     public void testShouldBeOpenAtFirst() {
-        final SmartDoorLock smartDoorLock = new SmartDoorLockImpl();
-        assertFalse(smartDoorLock.isLocked());
-        assertFalse(smartDoorLock.isBlocked());
+        assertFalse(this.smartDoorLockUnderTest.isLocked());
+        assertFalse(this.smartDoorLockUnderTest.isBlocked());
     }
 }
