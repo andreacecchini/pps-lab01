@@ -3,6 +3,7 @@ package it.unibo.pps.tdd;
 public class SmartDoorLockImpl implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private int pin;
+    private int numberOfAttempts = 0;
 
     private enum SmartDoorState {
         UNLOCKED,
@@ -19,6 +20,8 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     public void unlock(int pin) {
         if (this.pin == pin) {
             this.state = SmartDoorState.UNLOCKED;
+        } else {
+            this.numberOfAttempts++;
         }
     }
 
@@ -44,7 +47,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public int getFailedAttempts() {
-        return 0;
+        return this.numberOfAttempts;
     }
 
     @Override
