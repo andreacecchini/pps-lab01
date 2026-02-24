@@ -1,29 +1,13 @@
 package it.unibo.pps.tdd;
 
-import java.util.Optional;
-
-/**
- * A {@link SmartDoorLock} with a maximum number of attempts.
- */
-public class SmartDoorWithMaxAttempts implements SmartDoorLock {
+public class BasicSmartDoorLock implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private boolean isPinSet = false;
-    private int numberOfAttempts = 0;
-    private final int maxNumberOfAttempts;
-    private final PinValidator pinValidator;
     private int pin;
-
-    public SmartDoorWithMaxAttempts(int maxNumberOfAttempts, PinValidator pinValidator) {
-        this.maxNumberOfAttempts = maxNumberOfAttempts;
-        this.pinValidator = pinValidator;
-    }
 
     @Override
     public void setPin(int pin) {
         if (isOpen()) {
-            if (!pinValidator.validate(pin)) {
-                throw new IllegalArgumentException();
-            }
             this.pin = pin;
             this.isPinSet = true;
         }
@@ -34,8 +18,6 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
         if (isLocked()) {
             if (this.pin == pin) {
                 unlockSmartDoor();
-            } else {
-                increaseNumberOfAttempts();
             }
         }
     }
@@ -56,17 +38,17 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public boolean isBlocked() {
-        return this.state == SmartDoorState.BLOCKED;
+        return false;
     }
 
     @Override
     public int getMaxAttempts() {
-        return this.maxNumberOfAttempts;
+        return Integer.MAX_VALUE;
     }
 
     @Override
     public int getFailedAttempts() {
-        return this.numberOfAttempts;
+        return 0;
     }
 
     @Override
@@ -74,20 +56,12 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
         unlockSmartDoor();
     }
 
-    private void increaseNumberOfAttempts() {
-        this.numberOfAttempts++;
-        if (this.numberOfAttempts == this.maxNumberOfAttempts) {
-            this.state = SmartDoorState.BLOCKED;
-        }
+    private boolean isOpen() {
+        return this.state == SmartDoorState.UNLOCKED;
     }
 
     private void unlockSmartDoor() {
         this.state = SmartDoorState.UNLOCKED;
         this.isPinSet = false;
-        this.numberOfAttempts = 0;
-    }
-
-    private boolean isOpen() {
-        return this.state == SmartDoorState.UNLOCKED;
     }
 }
