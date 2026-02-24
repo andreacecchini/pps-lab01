@@ -2,6 +2,8 @@ package it.unibo.pps.tdd;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +27,13 @@ public class SmartDoorLockTest {
     void testShouldBePossibleToSetPinAfterInitialization() {
         assertDoesNotThrow(() -> this.smartDoorLockUnderTest.setPin(PIN));
         assertIsOpen();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 12, 123, 1234567, -1234})
+    void testPinShouldThrowExceptionForInvalidLength(int wrongLengthPin) {
+        assertThrows(IllegalArgumentException.class,
+                () -> this.smartDoorLockUnderTest.setPin(wrongLengthPin));
     }
 
     @Test

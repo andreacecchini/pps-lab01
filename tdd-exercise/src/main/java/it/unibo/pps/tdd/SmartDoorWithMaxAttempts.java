@@ -3,6 +3,7 @@ package it.unibo.pps.tdd;
 import java.util.Optional;
 
 public class SmartDoorWithMaxAttempts implements SmartDoorLock {
+    private static final int MAX_PIN_LENGTH = 4;
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private Optional<Integer> pin;
     private int numberOfAttempts = 0;
@@ -21,6 +22,9 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     @Override
     public void setPin(int pin) {
         if (this.state == SmartDoorState.UNLOCKED) {
+            if (!hasRightLength(pin)) {
+                throw new IllegalArgumentException("Invalid pin: should have 4 digits.");
+            }
             this.pin = Optional.of(pin);
         }
     }
@@ -35,7 +39,6 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
             }
         }
     }
-
 
     @Override
     public void lock() {
@@ -79,5 +82,9 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     private boolean isUnlockingAllowed() {
         return this.state == SmartDoorState.LOCKED && this.pin.isPresent();
+    }
+
+    private boolean hasRightLength(int pin) {
+        return pin >= 1000 && pin <= 9999;
     }
 }
