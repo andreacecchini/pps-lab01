@@ -20,7 +20,9 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public void setPin(int pin) {
-        this.pin = Optional.of(pin);
+        if (this.state == SmartDoorState.UNLOCKED) {
+            this.pin = Optional.of(pin);
+        }
     }
 
     @Override

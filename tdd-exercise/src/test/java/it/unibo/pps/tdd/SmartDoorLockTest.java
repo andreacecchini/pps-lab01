@@ -28,6 +28,18 @@ public class SmartDoorLockTest {
     }
 
     @Test
+    void testShouldNotBePossibleToSetPinAfterLocking() {
+        final var newPin = 4321;
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.lock();
+        this.smartDoorLockUnderTest.setPin(newPin);
+        this.smartDoorLockUnderTest.unlock(newPin);
+        assertTrue(this.smartDoorLockUnderTest.isLocked());
+        this.smartDoorLockUnderTest.unlock(PIN);
+        assertIsOpen();
+    }
+
+    @Test
     void testShouldBePossibleToLockAfterPinIsSet() {
         this.smartDoorLockUnderTest.setPin(PIN);
         assertDoesNotThrow(() -> this.smartDoorLockUnderTest.lock());
@@ -87,6 +99,7 @@ public class SmartDoorLockTest {
         this.smartDoorLockUnderTest.unlock(PIN);
         assertTrue(this.smartDoorLockUnderTest.isBlocked());
     }
+
     @Test
     void testShouldBeOpenAfterResetWhenBlocked() {
         this.smartDoorLockUnderTest.setPin(PIN);
