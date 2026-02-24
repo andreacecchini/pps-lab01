@@ -1,13 +1,10 @@
 package it.unibo.pps.tdd;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SmartDoorLockWithMaxAttemptsTest extends SmartDoorLockTest {
+final class SmartDoorLockWithMaxAttemptsTest extends SmartDoorLockTest {
     private static final int MAX_PIN_LENGTH = 4;
     private static final int PIN = 1234;
     private static final int WRONG_PIN = 0;
@@ -15,8 +12,7 @@ public class SmartDoorLockWithMaxAttemptsTest extends SmartDoorLockTest {
 
     @Override
     protected SmartDoorLock createSmartDoorLock() {
-        final PinValidator lengthValidator = pin -> pin >= Math.powExact(10, MAX_PIN_LENGTH - 1) && pin <= Math.powExact(10, MAX_PIN_LENGTH) - 1;
-        return new SmartDoorWithMaxAttempts(MAX_ATTEMPTS, lengthValidator);
+        return new SmartDoorWithMaxAttempts(new BasicSmartDoorLock(), MAX_ATTEMPTS);
     }
 
     @Test

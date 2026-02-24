@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class SmartDoorLockTest {
+abstract class SmartDoorLockTest {
     private static final int PIN = 1234;
-    private static final int WRONG_PIN = 0;
+    protected static final int WRONG_PIN = 0;
     protected SmartDoorLock smartDoorLockUnderTest;
 
     @BeforeEach

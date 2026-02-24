@@ -5,7 +5,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SmartDoorLockWithPinValidationTest extends SmartDoorLockTest {
+final class SmartDoorLockWithPinValidationTest extends SmartDoorLockTest {
     private static final int MAX_PIN_LENGTH = 4;
 
     @Override

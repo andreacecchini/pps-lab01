@@ -1,39 +1,24 @@
 package it.unibo.pps.tdd;
 
-import java.util.Optional;
-
 /**
  * A {@link SmartDoorLock} with a maximum number of attempts.
  */
-public class SmartDoorWithMaxAttempts implements SmartDoorLock {
-    private SmartDoorState state = SmartDoorState.UNLOCKED;
-    private boolean isPinSet = false;
+public final class SmartDoorWithMaxAttempts extends SmartDoorLockDecorator {
+    private boolean isBlocked = false;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
-    private final PinValidator pinValidator;
-    private int pin;
 
-    public SmartDoorWithMaxAttempts(int maxNumberOfAttempts, PinValidator pinValidator) {
+    public SmartDoorWithMaxAttempts(SmartDoorLock wrapped, int maxNumberOfAttempts) {
+        super(wrapped);
         this.maxNumberOfAttempts = maxNumberOfAttempts;
-        this.pinValidator = pinValidator;
-    }
-
-    @Override
-    public void setPin(int pin) {
-        if (isOpen()) {
-            if (!pinValidator.validate(pin)) {
-                throw new IllegalArgumentException();
-            }
-            this.pin = pin;
-            this.isPinSet = true;
-        }
     }
 
     @Override
     public void unlock(int pin) {
-        if (isLocked()) {
-            if (this.pin == pin) {
-                unlockSmartDoor();
+        if (!isBlocked()) {
+            super.unlock(pin);
+            if (isOpen()) {
+                resetNumberOfAttempts();
             } else {
                 increaseNumberOfAttempts();
             }
@@ -41,22 +26,8 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     }
 
     @Override
-    public void lock() {
-        if (this.isPinSet) {
-            this.state = SmartDoorState.LOCKED;
-        } else {
-            throw new IllegalStateException();
-        }
-    }
-
-    @Override
-    public boolean isLocked() {
-        return this.state == SmartDoorState.LOCKED;
-    }
-
-    @Override
     public boolean isBlocked() {
-        return this.state == SmartDoorState.BLOCKED;
+        return this.isBlocked;
     }
 
     @Override
@@ -71,23 +42,31 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public void reset() {
-        unlockSmartDoor();
+        super.reset();
+        resetNumberOfAttempts();
+        unblock();
     }
 
     private void increaseNumberOfAttempts() {
         this.numberOfAttempts++;
         if (this.numberOfAttempts == this.maxNumberOfAttempts) {
-            this.state = SmartDoorState.BLOCKED;
+            block();
         }
     }
 
-    private void unlockSmartDoor() {
-        this.state = SmartDoorState.UNLOCKED;
-        this.isPinSet = false;
+    private void resetNumberOfAttempts() {
         this.numberOfAttempts = 0;
     }
 
     private boolean isOpen() {
-        return this.state == SmartDoorState.UNLOCKED;
+        return !isBlocked && !isLocked();
+    }
+
+    private void block() {
+        this.isBlocked = true;
+    }
+
+    private void unblock() {
+        this.isBlocked = false;
     }
 }
