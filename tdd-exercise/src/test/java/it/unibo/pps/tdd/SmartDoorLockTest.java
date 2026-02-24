@@ -132,6 +132,28 @@ public class SmartDoorLockTest {
         assertThrows(IllegalStateException.class, () -> this.smartDoorLockUnderTest.lock());
     }
 
+    @Test
+    void testNumberOfFailedAttemptsShouldBeZeroAfterReset() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.lock();
+        for (int i = 1; i <= MAX_ATTEMPTS; i++) {
+            this.smartDoorLockUnderTest.unlock(WRONG_PIN);
+        }
+        this.smartDoorLockUnderTest.reset();
+        assertEquals(0, this.smartDoorLockUnderTest.getFailedAttempts());
+    }
+
+    @Test
+    void testNumberOfFailedAttemptsShouldBeZeroAfterUnlocking() {
+        this.smartDoorLockUnderTest.setPin(PIN);
+        this.smartDoorLockUnderTest.lock();
+        for (int i = 1; i <= MAX_ATTEMPTS - 1; i++) {
+            this.smartDoorLockUnderTest.unlock(WRONG_PIN);
+        }
+        this.smartDoorLockUnderTest.unlock(PIN);
+        assertEquals(0, this.smartDoorLockUnderTest.getFailedAttempts());
+    }
+
     private void assertIsOpen() {
         assertFalse(this.smartDoorLockUnderTest.isLocked());
         assertFalse(this.smartDoorLockUnderTest.isBlocked());

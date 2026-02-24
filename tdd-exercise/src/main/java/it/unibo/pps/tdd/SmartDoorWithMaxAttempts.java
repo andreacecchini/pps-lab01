@@ -34,6 +34,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
         if (isUnlockingAllowed()) {
             if (this.pin.get() == pin) {
                 this.state = SmartDoorState.UNLOCKED;
+                this.numberOfAttempts = 0;
             } else {
                 increaseNumberOfAttempts();
             }
@@ -71,6 +72,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     public void reset() {
         this.state = SmartDoorState.UNLOCKED;
         this.pin = Optional.empty();
+        this.numberOfAttempts = 0;
     }
 
     private void increaseNumberOfAttempts() {
