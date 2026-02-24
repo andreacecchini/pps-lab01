@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
-    public static final int PIN = 1234;
+    private static final int PIN = 1234;
     private SmartDoorLock smartDoorLockUnderTest;
 
     @BeforeEach
@@ -16,13 +16,16 @@ public class SmartDoorLockTest {
 
     @Test
     void testShouldBeOpenAfterInitialization() {
-        assertFalse(this.smartDoorLockUnderTest.isLocked());
-        assertFalse(this.smartDoorLockUnderTest.isBlocked());
+        assertIsOpen();
     }
 
     @Test
     void testShouldBePossibleToSetPinAfterInitialization() {
         assertDoesNotThrow(() -> this.smartDoorLockUnderTest.setPin(PIN));
+        assertIsOpen();
+    }
+
+    private void assertIsOpen() {
         assertFalse(this.smartDoorLockUnderTest.isLocked());
         assertFalse(this.smartDoorLockUnderTest.isBlocked());
     }
