@@ -25,7 +25,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
 
     @Override
     public void setPin(int pin) {
-        if (this.state == SmartDoorState.UNLOCKED) {
+        if (isOpen()) {
             if (!hasRightLength(pin)) {
                 throw new IllegalArgumentException();
             }
@@ -94,5 +94,9 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
         this.state = SmartDoorState.UNLOCKED;
         this.isPinSet = false;
         this.numberOfAttempts = 0;
+    }
+
+    private boolean isOpen() {
+        return this.state == SmartDoorState.UNLOCKED;
     }
 }
