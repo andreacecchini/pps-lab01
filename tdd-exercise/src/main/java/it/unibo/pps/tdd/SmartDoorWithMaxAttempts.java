@@ -6,15 +6,16 @@ import java.util.Optional;
  * A {@link SmartDoorLock} with a maximum number of attempts.
  */
 public class SmartDoorWithMaxAttempts implements SmartDoorLock {
-    private static final int MAX_PIN_LENGTH = 4;
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private int pin;
     private boolean isPinSet = false;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
+    private final PinValidator pinValidator;
 
-    public SmartDoorWithMaxAttempts(int maxNumberOfAttempts) {
+    public SmartDoorWithMaxAttempts(int maxNumberOfAttempts, PinValidator pinValidator) {
         this.maxNumberOfAttempts = maxNumberOfAttempts;
+        this.pinValidator = pinValidator;
     }
 
     private enum SmartDoorState {
@@ -26,7 +27,7 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
     @Override
     public void setPin(int pin) {
         if (isOpen()) {
-            if (!hasRightLength(pin)) {
+            if (!pinValidator.validate(pin)) {
                 throw new IllegalArgumentException();
             }
             this.pin = pin;
@@ -84,10 +85,6 @@ public class SmartDoorWithMaxAttempts implements SmartDoorLock {
         if (this.numberOfAttempts == this.maxNumberOfAttempts) {
             this.state = SmartDoorState.BLOCKED;
         }
-    }
-
-    private boolean hasRightLength(int pin) {
-        return pin >= Math.powExact(10, MAX_PIN_LENGTH - 1) && pin <= Math.powExact(10, MAX_PIN_LENGTH) - 1;
     }
 
     private void unlockSmartDoor() {

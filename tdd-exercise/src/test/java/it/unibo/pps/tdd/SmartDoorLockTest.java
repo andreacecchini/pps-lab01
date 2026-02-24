@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
+    private static final int MAX_PIN_LENGTH = 4;
     private static final int PIN = 1234;
     private static final int WRONG_PIN = 0;
     private static final int MAX_ATTEMPTS = 10;
@@ -15,7 +16,8 @@ public class SmartDoorLockTest {
 
     @BeforeEach
     void beforeEach() {
-        this.smartDoorLockUnderTest = new SmartDoorWithMaxAttempts(MAX_ATTEMPTS);
+        final PinValidator lengthValidator = pin -> pin >= Math.powExact(10, MAX_PIN_LENGTH - 1) && pin <= Math.powExact(10, MAX_PIN_LENGTH) - 1;
+        this.smartDoorLockUnderTest = new SmartDoorWithMaxAttempts(MAX_ATTEMPTS, lengthValidator);
     }
 
     @Test
