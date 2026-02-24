@@ -1,5 +1,9 @@
 package it.unibo.pps.tdd;
 
+/**
+ * A {@link SmartDoorLockDecorator} for a {@link SmartDoorLock} that adds
+ * pin validation.
+ */
 final class SmartDoorLockWithPinValidation extends SmartDoorLockDecorator {
     private final PinValidator pinValidator;
 
