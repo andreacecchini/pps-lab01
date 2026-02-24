@@ -12,8 +12,9 @@ public class SmartDoorLockTest {
     void beforeEach() {
         this.smartDoorLockUnderTest = new SmartDoorLockImpl();
     }
+
     @Test
-    public void testShouldBeOpenAtFirst() {
+    void testShouldBeOpenAtFirst() {
         assertFalse(this.smartDoorLockUnderTest.isLocked());
         assertFalse(this.smartDoorLockUnderTest.isBlocked());
     }
