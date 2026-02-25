@@ -116,6 +116,17 @@ class MinMaxStackImplTest {
         assertEquals(firstValueToPush, this.stackUnderTest.getMin());
     }
 
+    @Test
+    void testMinShouldBeTheSameIfNotPopped() {
+        int firstValueToPush = 1;
+        int secondValueToPush = 3;
+        int thirdValueToPush = 2;
+        this.stackUnderTest.push(firstValueToPush);
+        this.stackUnderTest.push(secondValueToPush);
+        this.stackUnderTest.push(thirdValueToPush);
+        this.stackUnderTest.pop();
+        assertEquals(firstValueToPush, this.stackUnderTest.getMin());
+    }
 
     @Test
     void testShouldThrowIllegalStateExceptionWhenPoppingFromEmptyStack() {

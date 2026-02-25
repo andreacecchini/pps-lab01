@@ -2,6 +2,10 @@ package it.unibo.pps.tdd;
 
 import java.util.Stack;
 
+/**
+ * A standard {@link MinMaxStack} implementation which uses two stacks
+ * to keep track the maximum and the minimum at each level of depth.
+ */
 public class MinMaxStackImpl implements MinMaxStack {
     final Stack<Integer> stack = new Stack<>();
     final Stack<Integer> maxStack = new Stack<>();
