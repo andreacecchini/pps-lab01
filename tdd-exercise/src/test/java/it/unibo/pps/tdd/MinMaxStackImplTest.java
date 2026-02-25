@@ -12,4 +12,16 @@ class MinMaxStackImplTest {
     void beforeEach() {
         this.stackUnderTest = new MinMaxStackImpl();
     }
+
+    @Test
+    void testShouldBeEmptyAfterInitialization() {
+        assertTrue(this.stackUnderTest.isEmpty());
+    }
+
+    @Test
+    void testShouldBePossibleToPush() {
+        int valueToPush = 1;
+        this.stackUnderTest.push(valueToPush);
+        assertEquals(valueToPush, this.stackUnderTest.peek());
+    }
 }

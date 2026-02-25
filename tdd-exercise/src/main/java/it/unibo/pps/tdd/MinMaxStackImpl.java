@@ -1,9 +1,13 @@
 package it.unibo.pps.tdd;
 
+import java.util.Stack;
+
 public class MinMaxStackImpl implements MinMaxStack {
+    final Stack<Integer> stack = new Stack<>();
+
     @Override
     public void push(int value) {
-
+        this.stack.push(value);
     }
 
     @Override
@@ -13,7 +17,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int peek() {
-        return 0;
+        return this.stack.peek();
     }
 
     @Override
@@ -28,7 +32,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     @Override
