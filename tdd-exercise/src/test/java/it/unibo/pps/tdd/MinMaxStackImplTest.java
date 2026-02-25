@@ -105,6 +105,18 @@ class MinMaxStackImplTest {
     }
 
     @Test
+    void testMaxShouldBeTheSameIfNotPopped() {
+        int firstValueToPush = 3;
+        int secondValueToPush = 1;
+        int thirdValueToPush = 2;
+        this.stackUnderTest.push(firstValueToPush);
+        this.stackUnderTest.push(secondValueToPush);
+        this.stackUnderTest.push(thirdValueToPush);
+        this.stackUnderTest.pop();
+        assertEquals(firstValueToPush, this.stackUnderTest.getMax());
+    }
+
+    @Test
     void testShouldUpdateMinAfterPoppingPreviousOne() {
         int firstValueToPush = 2;
         int secondValueToPush = 3;
