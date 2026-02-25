@@ -60,6 +60,11 @@ public class MinMaxStackImpl implements MinMaxStack {
         updateMaxAfterPush(value);
     }
 
+    private void updateMinMaxAfterPop() {
+        updateMinAfterPop();
+        updateMaxAfterPop();
+    }
+
     private void updateMinAfterPush(int value) {
         int currentMin = this.minStack.isEmpty() ? value : getMin();
         this.minStack.push(Math.min(value, currentMin));
@@ -70,10 +75,6 @@ public class MinMaxStackImpl implements MinMaxStack {
         this.maxStack.push(Math.max(value, currentMax));
     }
 
-    private void updateMinMaxAfterPop() {
-        updateMinAfterPop();
-        updateMaxAfterPop();
-    }
 
     private void updateMinAfterPop() {
         this.minStack.pop();
