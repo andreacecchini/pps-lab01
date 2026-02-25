@@ -62,6 +62,17 @@ class MinMaxStackImplTest {
     }
 
     @Test
+    void testPeekShouldRetrieveTheLastValuePushedWithoutRemovingIt() {
+        int firstValueToPush = 1;
+        int secondValueToPush = 2;
+        this.stackUnderTest.push(firstValueToPush);
+        this.stackUnderTest.push(secondValueToPush);
+        int peekedValue = this.stackUnderTest.peek();
+        assertEquals(secondValueToPush, peekedValue);
+        assertEquals(2, this.stackUnderTest.peek());
+    }
+
+    @Test
     void testShouldThrowIllegalStateExceptionWhenPoppingFromEmptyStack() {
         assertThrows(IllegalStateException.class, () -> this.stackUnderTest.pop());
     }
