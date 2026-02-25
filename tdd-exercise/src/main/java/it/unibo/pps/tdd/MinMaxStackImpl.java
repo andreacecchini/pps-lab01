@@ -6,8 +6,6 @@ public class MinMaxStackImpl implements MinMaxStack {
     final Stack<Integer> stack = new Stack<>();
     final Stack<Integer> maxStack = new Stack<>();
     final Stack<Integer> minStack = new Stack<>();
-    int max = Integer.MIN_VALUE;
-    int min = Integer.MAX_VALUE;
 
     @Override
     public void push(int value) {
@@ -58,22 +56,30 @@ public class MinMaxStackImpl implements MinMaxStack {
     }
 
     private void updateMinMaxAfterPush(int value) {
-        int currentMax = this.maxStack.isEmpty() ? value : getMax();
+        updateMinAfterPush(value);
+        updateMaxAfterPush(value);
+    }
+
+    private void updateMinAfterPush(int value) {
         int currentMin = this.minStack.isEmpty() ? value : getMin();
-        if (value >= currentMax) {
-            this.maxStack.push(value);
-        } else {
-            this.maxStack.push(getMax());
-        }
-        if (value <= currentMin) {
-            this.minStack.push(value);
-        } else {
-            this.minStack.push(getMin());
-        }
+        this.minStack.push(Math.min(value, currentMin));
+    }
+
+    private void updateMaxAfterPush(int value) {
+        int currentMax = this.maxStack.isEmpty() ? value : getMax();
+        this.maxStack.push(Math.max(value, currentMax));
     }
 
     private void updateMinMaxAfterPop() {
-        this.maxStack.pop();
+        updateMinAfterPop();
+        updateMaxAfterPop();
+    }
+
+    private void updateMinAfterPop() {
         this.minStack.pop();
+    }
+
+    private void updateMaxAfterPop() {
+        this.maxStack.pop();
     }
 }
