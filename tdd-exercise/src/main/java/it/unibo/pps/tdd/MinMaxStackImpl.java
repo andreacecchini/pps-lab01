@@ -9,13 +9,8 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public void push(int value) {
-        if (value > this.max) {
-            this.max = value;
-        }
-        if (value < min) {
-            this.min = value;
-        }
         this.stack.push(value);
+        updateMinMaxAfterPush(value);
     }
 
     @Override
@@ -55,6 +50,15 @@ public class MinMaxStackImpl implements MinMaxStack {
     private void checkEmpty() {
         if (this.stack.isEmpty()) {
             throw new IllegalStateException();
+        }
+    }
+
+    private void updateMinMaxAfterPush(int value) {
+        if (value > this.max) {
+            this.max = value;
+        }
+        if (value < min) {
+            this.min = value;
         }
     }
 }
