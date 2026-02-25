@@ -86,4 +86,10 @@ class MinMaxStackImplTest {
     void testShouldThrowIllegalStateExceptionWhenGettingMaxFromEmptyStack() {
         assertThrows(IllegalStateException.class, () -> this.stackUnderTest.getMax());
     }
+
+    @Test
+    void testShouldThrowIllegalStateExceptionWhenGettingMinFromEmptyStack() {
+        assertThrows(IllegalStateException.class, () -> this.stackUnderTest.getMin());
+    }
+
 }
