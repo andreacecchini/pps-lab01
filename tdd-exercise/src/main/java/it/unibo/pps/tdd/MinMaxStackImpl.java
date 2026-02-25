@@ -4,6 +4,8 @@ import java.util.Stack;
 
 public class MinMaxStackImpl implements MinMaxStack {
     final Stack<Integer> stack = new Stack<>();
+    final Stack<Integer> maxStack = new Stack<>();
+    final Stack<Integer> minStack = new Stack<>();
     int max = Integer.MIN_VALUE;
     int min = Integer.MAX_VALUE;
 
@@ -16,7 +18,9 @@ public class MinMaxStackImpl implements MinMaxStack {
     @Override
     public int pop() {
         checkEmpty();
-        return this.stack.pop();
+        int poppedValue = this.stack.pop();
+        updateMinMaxAfterPop();
+        return poppedValue;
     }
 
     @Override
@@ -28,13 +32,13 @@ public class MinMaxStackImpl implements MinMaxStack {
     @Override
     public int getMin() {
         checkEmpty();
-        return this.min;
+        return this.minStack.peek();
     }
 
     @Override
     public int getMax() {
         checkEmpty();
-        return this.max;
+        return this.maxStack.peek();
     }
 
     @Override
@@ -54,11 +58,22 @@ public class MinMaxStackImpl implements MinMaxStack {
     }
 
     private void updateMinMaxAfterPush(int value) {
-        if (value > this.max) {
-            this.max = value;
+        int currentMax = this.maxStack.isEmpty() ? value : getMax();
+        int currentMin = this.minStack.isEmpty() ? value : getMin();
+        if (value >= currentMax) {
+            this.maxStack.push(value);
+        } else {
+            this.maxStack.push(getMax());
         }
-        if (value < min) {
-            this.min = value;
+        if (value <= currentMin) {
+            this.minStack.push(value);
+        } else {
+            this.minStack.push(getMin());
         }
+    }
+
+    private void updateMinMaxAfterPop() {
+        this.maxStack.pop();
+        this.minStack.pop();
     }
 }

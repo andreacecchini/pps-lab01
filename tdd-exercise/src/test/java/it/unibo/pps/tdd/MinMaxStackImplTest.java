@@ -32,7 +32,7 @@ class MinMaxStackImplTest {
 
     @Test
     void testSizeShouldIncreaseAfterPushing() {
-        int  valueToPush = 1;
+        int valueToPush = 1;
         this.stackUnderTest.push(valueToPush);
         assertEquals(1, this.stackUnderTest.size());
     }
@@ -48,7 +48,7 @@ class MinMaxStackImplTest {
     void testShouldBePossibleToPopIfNotEmpty() {
         int valueToPop = 1;
         this.stackUnderTest.push(valueToPop);
-        assertDoesNotThrow(() ->  this.stackUnderTest.pop());
+        assertDoesNotThrow(() -> this.stackUnderTest.pop());
     }
 
     @Test
@@ -90,6 +90,18 @@ class MinMaxStackImplTest {
         this.stackUnderTest.push(secondValueToPush);
         int minValue = this.stackUnderTest.getMin();
         assertEquals(secondValueToPush, minValue);
+    }
+
+    @Test
+    void testShouldUpdateMaxAfterPoppingPreviousOne() {
+        int firstValueToPush = 2;
+        int secondValueToPush = 1;
+        int thirdValueToPush = 3;
+        this.stackUnderTest.push(firstValueToPush);
+        this.stackUnderTest.push(secondValueToPush);
+        this.stackUnderTest.push(thirdValueToPush);
+        this.stackUnderTest.pop();
+        assertEquals(firstValueToPush, this.stackUnderTest.getMax());
     }
 
     @Test
