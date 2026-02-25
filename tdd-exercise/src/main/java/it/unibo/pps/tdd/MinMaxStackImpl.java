@@ -4,9 +4,13 @@ import java.util.Stack;
 
 public class MinMaxStackImpl implements MinMaxStack {
     final Stack<Integer> stack = new Stack<>();
+    int max = Integer.MIN_VALUE;
 
     @Override
     public void push(int value) {
+        if (value > this.max) {
+            this.max = value;
+        }
         this.stack.push(value);
     }
 
@@ -31,7 +35,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     @Override
     public int getMax() {
         checkEmpty();
-        return 0;
+        return this.max;
     }
 
     @Override
