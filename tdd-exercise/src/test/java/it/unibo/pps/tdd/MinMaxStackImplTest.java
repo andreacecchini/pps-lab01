@@ -81,4 +81,9 @@ class MinMaxStackImplTest {
     void testShouldThrowIllegalStateExceptionWhenPeekingToEmptyStack() {
         assertThrows(IllegalStateException.class, () -> this.stackUnderTest.peek());
     }
+
+    @Test
+    void testShouldThrowIllegalStateExceptionWhenGettingMaxFromEmptyStack() {
+        assertThrows(IllegalStateException.class, () -> this.stackUnderTest.getMax());
+    }
 }
