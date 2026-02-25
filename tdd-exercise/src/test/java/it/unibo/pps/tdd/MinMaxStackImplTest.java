@@ -23,12 +23,18 @@ class MinMaxStackImplTest {
         assertEquals(0, this.stackUnderTest.size());
     }
 
-
     @Test
     void testShouldBePossibleToPush() {
         int valueToPush = 1;
         this.stackUnderTest.push(valueToPush);
         assertEquals(valueToPush, this.stackUnderTest.peek());
+    }
+
+    @Test
+    void testSizeShouldIncreaseAfterPushing() {
+        int  valueToPush = 1;
+        this.stackUnderTest.push(valueToPush);
+        assertEquals(1, this.stackUnderTest.size());
     }
 
     @Test
