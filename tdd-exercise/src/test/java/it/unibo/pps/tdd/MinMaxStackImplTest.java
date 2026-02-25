@@ -60,4 +60,9 @@ class MinMaxStackImplTest {
         int poppedValue = this.stackUnderTest.pop();
         assertEquals(secondValueToPush, poppedValue);
     }
+
+    @Test
+    void testShouldThrowIllegalStateExceptionWhenPoppingFromEmptyStack() {
+        assertThrows(IllegalStateException.class, () -> this.stackUnderTest.pop());
+    }
 }
