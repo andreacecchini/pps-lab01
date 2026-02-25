@@ -12,14 +12,13 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int pop() {
-        if  (this.stack.isEmpty()) {
-            throw new IllegalStateException();
-        }
+        checkEmpty();
         return this.stack.pop();
     }
 
     @Override
     public int peek() {
+        checkEmpty();
         return this.stack.peek();
     }
 
@@ -41,5 +40,11 @@ public class MinMaxStackImpl implements MinMaxStack {
     @Override
     public int size() {
         return this.stack.size();
+    }
+
+    private void checkEmpty() {
+        if (this.stack.isEmpty()) {
+            throw new IllegalStateException();
+        }
     }
 }
