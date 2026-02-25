@@ -38,4 +38,14 @@ class MinMaxStackImplTest {
         this.stackUnderTest.push(valueToPop);
         assertDoesNotThrow(() ->  this.stackUnderTest.pop());
     }
+
+    @Test
+    void testPopShouldRetrieveTheLastValuePushed() {
+        int firstValueToPush = 1;
+        int secondValueToPush = 2;
+        this.stackUnderTest.push(firstValueToPush);
+        this.stackUnderTest.push(secondValueToPush);
+        int poppedValue = this.stackUnderTest.pop();
+        assertEquals(secondValueToPush, poppedValue);
+    }
 }
