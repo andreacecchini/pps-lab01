@@ -1,12 +1,15 @@
 package it.unibo.pps.tdd;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MinMaxStackImplTest {
-    @Test
-    public void todo() {
-        assertTrue(true);
+    private MinMaxStack stackUnderTest;
+
+    @BeforeEach
+    void beforeEach() {
+        this.stackUnderTest = new MinMaxStackImpl();
     }
 }
