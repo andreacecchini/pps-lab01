@@ -19,6 +19,12 @@ class MinMaxStackImplTest {
     }
 
     @Test
+    void testSizeShouldBeZeroAfterInitialization() {
+        assertEquals(0, this.stackUnderTest.size());
+    }
+
+
+    @Test
     void testShouldBePossibleToPush() {
         int valueToPush = 1;
         this.stackUnderTest.push(valueToPush);
