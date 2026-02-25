@@ -24,4 +24,11 @@ class MinMaxStackImplTest {
         this.stackUnderTest.push(valueToPush);
         assertEquals(valueToPush, this.stackUnderTest.peek());
     }
+
+    @Test
+    void testShouldNotBeEmptyAfterPushing() {
+        int valueToPush = 1;
+        this.stackUnderTest.push(valueToPush);
+        assertFalse(this.stackUnderTest.isEmpty());
+    }
 }

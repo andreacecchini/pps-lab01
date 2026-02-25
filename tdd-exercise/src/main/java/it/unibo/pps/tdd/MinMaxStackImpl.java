@@ -32,7 +32,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public boolean isEmpty() {
-        return true;
+        return this.stack.isEmpty();
     }
 
     @Override
