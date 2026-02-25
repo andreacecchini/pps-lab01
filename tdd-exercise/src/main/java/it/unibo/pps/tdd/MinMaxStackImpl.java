@@ -75,7 +75,6 @@ public class MinMaxStackImpl implements MinMaxStack {
         this.maxStack.push(Math.max(value, currentMax));
     }
 
-
     private void updateMinAfterPop() {
         this.minStack.pop();
     }
