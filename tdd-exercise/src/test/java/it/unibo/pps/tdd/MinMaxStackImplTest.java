@@ -31,4 +31,11 @@ class MinMaxStackImplTest {
         this.stackUnderTest.push(valueToPush);
         assertFalse(this.stackUnderTest.isEmpty());
     }
+
+    @Test
+    void testShouldBePossibleToPopIfNotEmpty() {
+        int valueToPop = 1;
+        this.stackUnderTest.push(valueToPop);
+        assertDoesNotThrow(() ->  this.stackUnderTest.pop());
+    }
 }
