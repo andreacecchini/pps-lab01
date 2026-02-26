@@ -68,7 +68,7 @@ public class CircularListTest {
     }
 
     @Test
-    void testDequeueShouldReturnsTheLastElementDequeuedRemovingIt() {
+    void testDequeueShouldReturnsTheLastElementEnqueuedRemovingIt() {
         int firstValue = 1;
         int secondValue = 2;
         this.circularQueueUnderTest.enqueue(firstValue);
