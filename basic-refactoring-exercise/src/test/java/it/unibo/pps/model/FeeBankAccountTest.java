@@ -9,7 +9,9 @@ public class FeeBankAccountTest extends AbstractBankAccountTest {
 
     @Override
     protected BankAccount createBankAccountUnderTest() {
-        return new FeeBankAccount(new SimpleBankAccount(this.accountHolder, INITIAL_BALANCE), WITHDRAWAL_FEE);
+        return new FeeBankAccount(
+                new SimpleBankAccount(this.accountHolder, INITIAL_BALANCE),
+                WITHDRAWAL_FEE);
     }
 
     @Test
