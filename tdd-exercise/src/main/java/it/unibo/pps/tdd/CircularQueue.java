@@ -40,4 +40,12 @@ public interface CircularQueue {
      * @return an {@link Optional} containing the first element, if present.
      */
     Optional<Integer> peek();
+
+    /**
+     * Enqueue a new value.
+     *
+     * @param valueToEnqueue
+     *         the value to be enqueued.
+     */
+    void enqueue(int valueToEnqueue);
 }

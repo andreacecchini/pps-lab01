@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The test suite for testing the CircularList implementation
@@ -39,5 +38,12 @@ public class CircularListTest {
     @Test
     void testPeekShouldReturnAnEmptyOptionalWhenEmpty() {
         assertEquals(Optional.empty(), this.circularQueueUnderTest.peek());
+    }
+
+    @Test
+    void testShouldBeNotEmptyAfterEnqueue() {
+        int valueToEnqueue = 1;
+        this.circularQueueUnderTest.enqueue(valueToEnqueue);
+        assertFalse(this.circularQueueUnderTest.isEmpty());
     }
 }

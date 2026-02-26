@@ -1,12 +1,16 @@
 package it.unibo.pps.tdd;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CircularList implements CircularQueue {
+    final List<Integer> buffer;
     final int capacity;
 
     public CircularList(int capacity) {
         this.capacity = capacity;
+        this.buffer = new ArrayList<>(this.capacity);
     }
 
     @Override
@@ -16,7 +20,7 @@ public class CircularList implements CircularQueue {
 
     @Override
     public int size() {
-        return 0;
+        return this.buffer.size();
     }
 
     @Override
@@ -27,5 +31,10 @@ public class CircularList implements CircularQueue {
     @Override
     public Optional<Integer> peek() {
         return Optional.empty();
+    }
+
+    @Override
+    public void enqueue(int valueToEnqueue) {
+        this.buffer.addLast(valueToEnqueue);
     }
 }
