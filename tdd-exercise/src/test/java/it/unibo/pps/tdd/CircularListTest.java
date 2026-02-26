@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -150,14 +151,10 @@ public class CircularListTest {
     }
 
     private void fillTheQueue() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        IntStream.range(0, CAPACITY).forEach(i -> this.circularQueueUnderTest.enqueue(i));
     }
 
     private void dequeueElements(int numOfElementsToRemove) {
-        for (int i = 0; i < numOfElementsToRemove; i++) {
-            this.circularQueueUnderTest.dequeue();
-        }
+        IntStream.range(0, numOfElementsToRemove).forEach(_ -> this.circularQueueUnderTest.dequeue());
     }
 }
