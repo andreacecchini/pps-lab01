@@ -134,6 +134,21 @@ public class CircularListTest {
         assertEquals(0, this.circularQueueUnderTest.size());
     }
 
+    @Test
+    void testShouldMaintainCorrectOrderAfterOverwriteAndInterleavedOperations() {
+        fillTheQueue();
+        int overwritingValue = CAPACITY;
+        this.circularQueueUnderTest.enqueue(overwritingValue);
+        this.circularQueueUnderTest.dequeue();
+        int subsequentValue = CAPACITY + 1;
+        this.circularQueueUnderTest.enqueue(subsequentValue);
+        int lastOriginalValue = CAPACITY - 1;
+        dequeueElements(CAPACITY - 3);
+        assertEquals(Optional.of(lastOriginalValue), this.circularQueueUnderTest.dequeue());
+        assertEquals(Optional.of(overwritingValue), this.circularQueueUnderTest.dequeue());
+        assertEquals(Optional.of(subsequentValue), this.circularQueueUnderTest.dequeue());
+    }
+
     private void fillTheQueue() {
         for (int i = 0; i < CAPACITY; i++) {
             this.circularQueueUnderTest.enqueue(i);

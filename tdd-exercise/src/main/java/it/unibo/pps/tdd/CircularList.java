@@ -1,6 +1,7 @@
 package it.unibo.pps.tdd;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class CircularList implements CircularQueue {
 
     public CircularList(int capacity) {
         this.capacity = capacity;
-        this.buffer = new ArrayList<>(this.capacity);
+        this.buffer = new ArrayList<>(Collections.nCopies(this.capacity, null));
     }
 
     @Override
@@ -41,11 +42,7 @@ public class CircularList implements CircularQueue {
 
     @Override
     public Optional<Integer> peek() {
-        try {
-            return Optional.ofNullable(this.buffer.get(this.front));
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(this.buffer.get(this.front));
     }
 
     @Override
@@ -54,22 +51,19 @@ public class CircularList implements CircularQueue {
             overwriteFront(valueToEnqueue);
         } else {
             append(valueToEnqueue);
+            this.size++;
         }
         nextRear();
     }
 
     @Override
     public Optional<Integer> dequeue() {
-        try {
-            final var previousFirst = removeAndRetrieveIfPresent();
-            if (previousFirst.isPresent()) {
-                this.size--;
-                nextFront();
-            }
-            return previousFirst;
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
+        final var previousFirst = removeAndRetrieveIfPresent();
+        if (previousFirst.isPresent()) {
+            this.size--;
+            nextFront();
         }
+        return previousFirst;
     }
 
     private Optional<Integer> removeAndRetrieveIfPresent() {
@@ -77,13 +71,12 @@ public class CircularList implements CircularQueue {
     }
 
     private void overwriteFront(int valueToEnqueue) {
-        this.buffer.set(this.rear, valueToEnqueue);
+        append(valueToEnqueue);
         nextFront();
     }
 
     private void append(int valueToEnqueue) {
-        this.buffer.addLast(valueToEnqueue);
-        this.size++;
+        this.buffer.set(this.rear, valueToEnqueue);
     }
 
     private void nextFront() {
