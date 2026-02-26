@@ -20,8 +20,8 @@ public abstract class AbstractBankAccountTest {
 
     @BeforeEach
     void beforeEach() {
-        accountHolder = new AccountHolder(ACCOUNT_HOLDER_NAME, ACCOUNT_HOLDER_SURNAME, ACCOUNT_HOLDER_ID);
-        bankAccount = createBankAccountUnderTest();
+        this.accountHolder = new AccountHolder(ACCOUNT_HOLDER_NAME, ACCOUNT_HOLDER_SURNAME, ACCOUNT_HOLDER_ID);
+        this.bankAccount = createBankAccountUnderTest();
     }
 
     @Test
@@ -31,48 +31,48 @@ public abstract class AbstractBankAccountTest {
 
     @Test
     void testDeposit() {
-        bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
+        this.bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
     }
 
     @Test
     void testShouldNotDepositWithWrongId() {
         final double wrongDepositAmount = 50.0;
-        bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
-        bankAccount.deposit(WRONG_ACCOUNT_HOLDER_ID, wrongDepositAmount);
+        this.bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
+        this.bankAccount.deposit(WRONG_ACCOUNT_HOLDER_ID, wrongDepositAmount);
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
     }
 
     @Test
     void testShouldNotBePossibleToDepositANegativeAmount() {
-        bankAccount.deposit(accountHolder.id(), NEGATIVE_AMOUNT);
+        this.bankAccount.deposit(accountHolder.id(), NEGATIVE_AMOUNT);
         assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
     }
 
     @Test
     void testWithdraw() {
-        bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
-        bankAccount.withdraw(accountHolder.id(), WITHDRAWAL_AMOUNT);
-        assertEquals(DEPOSIT_AMOUNT - WITHDRAWAL_AMOUNT, bankAccount.getBalance());
+        this.bankAccount.deposit(this.accountHolder.id(), DEPOSIT_AMOUNT);
+        this.bankAccount.withdraw(this.accountHolder.id(), WITHDRAWAL_AMOUNT);
+        assertEquals(DEPOSIT_AMOUNT - WITHDRAWAL_AMOUNT, this.bankAccount.getBalance());
     }
 
     @Test
     void testShouldNotWithdrawWithWrongId() {
-        bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
-        bankAccount.withdraw(WRONG_ACCOUNT_HOLDER_ID, WITHDRAWAL_AMOUNT);
-        assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
+        this.bankAccount.deposit(accountHolder.id(), DEPOSIT_AMOUNT);
+        this.bankAccount.withdraw(WRONG_ACCOUNT_HOLDER_ID, WITHDRAWAL_AMOUNT);
+        assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
     }
 
     @Test
     void testShouldNotWithdrawIfNotEnoughMoney() {
-        bankAccount.withdraw(accountHolder.id(), WITHDRAWAL_AMOUNT);
-        assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
+        this.bankAccount.withdraw(this.accountHolder.id(), WITHDRAWAL_AMOUNT);
+        assertEquals(INITIAL_BALANCE, this.bankAccount.getBalance());
     }
 
     @Test
     void testShouldNotBePossibleToWithdrawANegativeAmount() {
-        bankAccount.withdraw(accountHolder.id(), NEGATIVE_AMOUNT);
-        assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
+        this.bankAccount.withdraw(this.accountHolder.id(), NEGATIVE_AMOUNT);
+        assertEquals(INITIAL_BALANCE, this.bankAccount.getBalance());
     }
 
     protected abstract BankAccount createBankAccountUnderTest();
