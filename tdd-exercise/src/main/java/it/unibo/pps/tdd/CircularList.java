@@ -6,7 +6,7 @@ public class CircularList implements CircularQueue {
 
     @Override
     public boolean isEmpty() {
-        return true;
+        return size() == 0;
     }
 
     @Override
