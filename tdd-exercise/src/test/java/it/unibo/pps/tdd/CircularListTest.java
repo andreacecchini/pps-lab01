@@ -119,4 +119,14 @@ public class CircularListTest {
         assertEquals(Optional.empty(), this.circularQueueUnderTest.peek());
         assertEquals(Optional.empty(), this.circularQueueUnderTest.dequeue());
     }
+
+    @Test
+    void testSizeShouldNotIncreaseTheCapacity() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
+        int newValue = 10;
+        this.circularQueueUnderTest.enqueue(newValue);
+        assertEquals(CAPACITY, this.circularQueueUnderTest.size());
+    }
 }
