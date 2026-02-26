@@ -61,10 +61,12 @@ public class CircularList implements CircularQueue {
     @Override
     public Optional<Integer> dequeue() {
         try {
-            int firstOfTheQueue = this.buffer.set(this.front, null);
-            this.size--;
-            this.front = (this.front + 1) % this.capacity;
-            return Optional.of(firstOfTheQueue);
+            final var firstOfTheQueue = Optional.ofNullable(this.buffer.set(this.front, null));
+            if (firstOfTheQueue.isPresent()) {
+                this.size--;
+                this.front = (this.front + 1) % this.capacity;
+            }
+            return firstOfTheQueue;
         } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }

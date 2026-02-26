@@ -106,4 +106,17 @@ public class CircularListTest {
             assertEquals(Optional.of(i), this.circularQueueUnderTest.dequeue());
         }
     }
+
+    @Test
+    void testShouldBeEmptyAfterQueueingAllElements() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.dequeue();
+        }
+        assertTrue(this.circularQueueUnderTest.isEmpty());
+        assertEquals(Optional.empty(), this.circularQueueUnderTest.peek());
+        assertEquals(Optional.empty(), this.circularQueueUnderTest.dequeue());
+    }
 }
