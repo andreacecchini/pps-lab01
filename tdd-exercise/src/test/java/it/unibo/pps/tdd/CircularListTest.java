@@ -80,17 +80,13 @@ public class CircularListTest {
 
     @Test
     void testShouldBeFullAfterReachingCapacity() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        fillTheQueue();
         assertTrue(this.circularQueueUnderTest.isFull());
     }
 
     @Test
     void testEnqueuingShouldOverwriteTheElderElementIfFull() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        fillTheQueue();
         int expectedFirst = 1;
         int newElement = 10;
         this.circularQueueUnderTest.enqueue(newElement);
@@ -99,9 +95,7 @@ public class CircularListTest {
 
     @Test
     void testShouldQueueingInCorrectOrder() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        fillTheQueue();
         for (int i = 0; i < CAPACITY; i++) {
             assertEquals(Optional.of(i), this.circularQueueUnderTest.dequeue());
         }
@@ -109,9 +103,7 @@ public class CircularListTest {
 
     @Test
     void testNewElementShouldBeLastIfOverwritesElder() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        fillTheQueue();
         int newValue = CAPACITY;
         this.circularQueueUnderTest.enqueue(newValue);
         for (int i = 0; i < CAPACITY - 1; i++) {
@@ -122,9 +114,7 @@ public class CircularListTest {
 
     @Test
     void testShouldBeEmptyAfterQueueingAllElements() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        fillTheQueue();
         for (int i = 0; i < CAPACITY; i++) {
             this.circularQueueUnderTest.dequeue();
         }
@@ -135,9 +125,7 @@ public class CircularListTest {
 
     @Test
     void testSizeShouldNotIncreaseTheCapacity() {
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.enqueue(i);
-        }
+        fillTheQueue();
         int newValue = 10;
         this.circularQueueUnderTest.enqueue(newValue);
         assertEquals(CAPACITY, this.circularQueueUnderTest.size());
@@ -147,5 +135,11 @@ public class CircularListTest {
     void testSizeShouldNotBeNegative() {
         this.circularQueueUnderTest.dequeue();
         assertEquals(0, this.circularQueueUnderTest.size());
+    }
+
+    private void fillTheQueue() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
     }
 }
