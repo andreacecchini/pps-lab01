@@ -19,4 +19,10 @@ public interface CircularQueue {
      * @return whether the queue is empty.
      */
     boolean isEmpty();
+
+    /**
+     *
+     * @return the number of elements inside the queue.
+     */
+    int size();
 }

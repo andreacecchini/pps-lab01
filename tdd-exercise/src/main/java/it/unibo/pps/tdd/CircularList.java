@@ -8,4 +8,9 @@ public class CircularList implements CircularQueue {
     public boolean isEmpty() {
         return true;
     }
+
+    @Override
+    public int size() {
+        return 0;
+    }
 }
