@@ -49,7 +49,7 @@ public class CircularList implements CircularQueue {
     public void enqueue(int valueToEnqueue) {
         if (isFull()) {
             this.buffer.set(this.rear, valueToEnqueue);
-            this.front = (this.front + 1) % this.capacity;
+            nextFront();
         } else {
             this.buffer.addLast(valueToEnqueue);
             this.size++;
@@ -63,11 +63,15 @@ public class CircularList implements CircularQueue {
             final var firstOfTheQueue = Optional.ofNullable(this.buffer.set(this.front, null));
             if (firstOfTheQueue.isPresent()) {
                 this.size--;
-                this.front = (this.front + 1) % this.capacity;
+                nextFront();
             }
             return firstOfTheQueue;
         } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
+    }
+
+    private void nextFront() {
+        this.front = (this.front + 1) % this.capacity;
     }
 }
