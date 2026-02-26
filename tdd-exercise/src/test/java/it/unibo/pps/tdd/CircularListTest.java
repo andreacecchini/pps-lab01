@@ -1,6 +1,5 @@
 package it.unibo.pps.tdd;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -96,5 +95,15 @@ public class CircularListTest {
         int newElement = 10;
         this.circularQueueUnderTest.enqueue(newElement);
         assertEquals(Optional.of(expectedFirst), this.circularQueueUnderTest.peek());
+    }
+
+    @Test
+    void testShouldQueueingInCorrectOrder() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
+        for (int i = 0; i < CAPACITY; i++) {
+            assertEquals(Optional.of(i), this.circularQueueUnderTest.dequeue());
+        }
     }
 }
