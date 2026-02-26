@@ -42,4 +42,9 @@ public class CircularList implements CircularQueue {
     public void enqueue(int valueToEnqueue) {
         this.buffer.addLast(valueToEnqueue);
     }
+
+    @Override
+    public Optional<Integer> dequeue() {
+        return Optional.empty();
+    }
 }

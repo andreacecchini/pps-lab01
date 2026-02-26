@@ -41,6 +41,10 @@ public class CircularListTest {
     }
 
     @Test
+    void testDequeueShouldReturnsAnEmptyOptionalWhenEmpty() {
+        assertEquals(Optional.empty(), this.circularQueueUnderTest.dequeue());
+    }
+    @Test
     void testShouldBeNotEmptyAfterEnqueue() {
         int valueToEnqueue = 1;
         this.circularQueueUnderTest.enqueue(valueToEnqueue);
