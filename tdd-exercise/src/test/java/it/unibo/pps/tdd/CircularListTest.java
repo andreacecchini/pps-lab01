@@ -19,6 +19,11 @@ public class CircularListTest {
     }
 
     @Test
+    void testShouldBeEmptyAfterInitialization() {
+        assertTrue(this.circularQueueUnderTest.isEmpty());
+    }
+
+    @Test
     public void todo() {
         assertTrue(true);
     }
