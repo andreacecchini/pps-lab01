@@ -49,6 +49,7 @@ public class CircularListTest {
     void testDequeueShouldReturnsAnEmptyOptionalWhenEmpty() {
         assertEquals(Optional.empty(), this.circularQueueUnderTest.dequeue());
     }
+
     @Test
     void testShouldBeNotEmptyAfterEnqueue() {
         int valueToEnqueue = 1;
@@ -84,5 +85,16 @@ public class CircularListTest {
             this.circularQueueUnderTest.enqueue(i);
         }
         assertTrue(this.circularQueueUnderTest.isFull());
+    }
+
+    @Test
+    void testEnqueuingShouldOverwriteTheElderElementIfFull() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
+        int expectedFirst = 1;
+        int newElement = 10;
+        this.circularQueueUnderTest.enqueue(newElement);
+        assertEquals(Optional.of(expectedFirst), this.circularQueueUnderTest.peek());
     }
 }

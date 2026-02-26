@@ -7,6 +7,9 @@ import java.util.Optional;
 
 public class CircularList implements CircularQueue {
     final List<Integer> buffer;
+    int front = 0;
+    int rear = 0;
+    int size = 0;
     final int capacity;
 
     public CircularList(int capacity) {
@@ -26,7 +29,7 @@ public class CircularList implements CircularQueue {
 
     @Override
     public int size() {
-        return this.buffer.size();
+        return this.size;
     }
 
     @Override
@@ -37,22 +40,32 @@ public class CircularList implements CircularQueue {
     @Override
     public Optional<Integer> peek() {
         try {
-            return Optional.ofNullable(this.buffer.getFirst());
-        } catch (NoSuchElementException e) {
+            return Optional.ofNullable(this.buffer.get(this.front));
+        } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
     }
 
     @Override
     public void enqueue(int valueToEnqueue) {
-        this.buffer.addLast(valueToEnqueue);
+        if (isFull()) {
+            this.buffer.set(this.rear, valueToEnqueue);
+            this.front = (this.front + 1) % this.capacity;
+        } else {
+            this.buffer.addLast(valueToEnqueue);
+            this.size++;
+        }
+        this.rear = (this.rear + 1) % this.capacity;
     }
 
     @Override
     public Optional<Integer> dequeue() {
         try {
-            return Optional.ofNullable(this.buffer.removeFirst());
-        } catch (NoSuchElementException e) {
+            int firstOfTheQueue = this.buffer.set(this.front, null);
+            this.size--;
+            this.front = (this.front + 1) % this.capacity;
+            return Optional.of(firstOfTheQueue);
+        } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
     }
