@@ -25,4 +25,10 @@ public interface CircularQueue {
      * @return the number of elements inside the queue.
      */
     int size();
+
+    /**
+     *
+     * @return the queue capacity.
+     */
+    int getCapacity();
 }

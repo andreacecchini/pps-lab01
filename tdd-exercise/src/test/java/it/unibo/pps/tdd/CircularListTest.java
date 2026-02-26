@@ -28,4 +28,9 @@ public class CircularListTest {
     void testSizeShouldBeZeroAfterInitialization() {
         assertEquals(0, this.circularQueueUnderTest.size());
     }
+
+    @Test
+    void testShouldBePossibleToGetTheCapacity() {
+        assertEquals(CAPACITY, this.circularQueueUnderTest.getCapacity());
+    }
 }
