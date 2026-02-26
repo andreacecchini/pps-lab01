@@ -53,7 +53,6 @@ public class CircularList implements CircularQueue {
             append(valueToEnqueue);
             this.size++;
         }
-        nextRear();
     }
 
     @Override
@@ -77,6 +76,7 @@ public class CircularList implements CircularQueue {
 
     private void append(int valueToEnqueue) {
         this.buffer.set(this.rear, valueToEnqueue);
+        nextRear();
     }
 
     private void nextFront() {
