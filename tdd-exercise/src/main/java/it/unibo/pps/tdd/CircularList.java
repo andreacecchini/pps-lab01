@@ -8,11 +8,11 @@ import java.util.Optional;
  * A {@link CircularQueue} implementation based on {@link List}.
  */
 public class CircularList implements CircularQueue {
-    final List<Integer> buffer;
-    int front = 0;
-    int rear = 0;
-    int size = 0;
-    final int capacity;
+    private final List<Integer> buffer;
+    private int front = 0;
+    private int rear = 0;
+    private int size = 0;
+    private final int capacity;
 
     public CircularList(int capacity) {
         this.capacity = capacity;
