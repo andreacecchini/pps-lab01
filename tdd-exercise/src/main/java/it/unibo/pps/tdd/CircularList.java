@@ -26,7 +26,7 @@ public class CircularList implements CircularQueue {
 
     @Override
     public boolean isFull() {
-        return this.size() == this.capacity;
+        return size() == getCapacity();
     }
 
     @Override
