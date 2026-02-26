@@ -9,7 +9,7 @@ public final class SmartDoorWithMaxAttempts extends SmartDoorLockDecorator {
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;
 
-    SmartDoorWithMaxAttempts(SmartDoorLock wrapped, int maxNumberOfAttempts) {
+    public SmartDoorWithMaxAttempts(SmartDoorLock wrapped, int maxNumberOfAttempts) {
         super(wrapped);
         this.maxNumberOfAttempts = maxNumberOfAttempts;
     }
