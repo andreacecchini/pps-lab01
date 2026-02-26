@@ -85,16 +85,16 @@ public class CircularListTest {
     }
 
     @Test
-    void testEnqueuingShouldOverwriteTheElderElementIfFull() {
+    void testEnqueuingShouldOverwriteFrontIfFull() {
         fillTheQueue();
         int expectedFirst = 1;
-        int newValue = 10;
-        this.circularQueueUnderTest.enqueue(newValue);
+        int overwritingValue = CAPACITY;
+        this.circularQueueUnderTest.enqueue(overwritingValue);
         assertEquals(Optional.of(expectedFirst), this.circularQueueUnderTest.peek());
     }
 
     @Test
-    void testShouldQueueingInCorrectOrder() {
+    void testShouldRemoveInFifoOrder() {
         fillTheQueue();
         for (int i = 0; i < CAPACITY; i++) {
             assertEquals(Optional.of(i), this.circularQueueUnderTest.dequeue());
@@ -102,16 +102,16 @@ public class CircularListTest {
     }
 
     @Test
-    void testNewElementShouldBeLastIfOverwritesElder() {
+    void testNewElementShouldBeLastIfOverwritesFront() {
         fillTheQueue();
-        int newValue = CAPACITY;
-        this.circularQueueUnderTest.enqueue(newValue);
+        int overwritingValue = CAPACITY;
+        this.circularQueueUnderTest.enqueue(overwritingValue);
         dequeueElements(CAPACITY - 1);
-        assertEquals(Optional.of(newValue), this.circularQueueUnderTest.peek());
+        assertEquals(Optional.of(overwritingValue), this.circularQueueUnderTest.peek());
     }
 
     @Test
-    void testShouldBeEmptyAfterQueueingAllElements() {
+    void testShouldBeEmptyAfterRemovingAllElements() {
         fillTheQueue();
         dequeueElements(CAPACITY);
         assertEquals(0, this.circularQueueUnderTest.size());
@@ -121,10 +121,10 @@ public class CircularListTest {
     }
 
     @Test
-    void testSizeShouldNotIncreaseTheCapacity() {
+    void testOverwriteShouldNotIncreaseSize() {
         fillTheQueue();
-        int newValue = 10;
-        this.circularQueueUnderTest.enqueue(newValue);
+        int overwritingValue = CAPACITY;
+        this.circularQueueUnderTest.enqueue(overwritingValue);
         assertEquals(CAPACITY, this.circularQueueUnderTest.size());
     }
 
@@ -135,7 +135,7 @@ public class CircularListTest {
     }
 
     @Test
-    void testShouldMaintainCorrectOrderAfterOverwriteAndInterleavedOperations() {
+    void testShouldMaintainFifoOrderAfterOverwriteAndInterleavedOperations() {
         fillTheQueue();
         int overwritingValue = CAPACITY;
         this.circularQueueUnderTest.enqueue(overwritingValue);
