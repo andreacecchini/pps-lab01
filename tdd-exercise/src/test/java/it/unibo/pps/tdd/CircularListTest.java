@@ -26,6 +26,11 @@ public class CircularListTest {
     }
 
     @Test
+    void testShouldNotBeFullAfterInitialization() {
+        assertFalse(this.circularQueueUnderTest.isFull());
+    }
+
+    @Test
     void testSizeShouldBeZeroAfterInitialization() {
         assertEquals(0, this.circularQueueUnderTest.size());
     }
