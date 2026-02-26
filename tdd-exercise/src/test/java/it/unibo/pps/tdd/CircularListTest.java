@@ -51,30 +51,30 @@ public class CircularListTest {
 
     @Test
     void testShouldBeNotEmptyAfterEnqueue() {
-        int valueToEnqueue = 1;
-        this.circularQueueUnderTest.enqueue(valueToEnqueue);
+        int value = 1;
+        this.circularQueueUnderTest.enqueue(value);
         assertFalse(this.circularQueueUnderTest.isEmpty());
     }
 
     @Test
     void testPeekShouldReturnsTheLastElementEnqueuedWithoutRemovingIt() {
-        int firstValueToEnqueue = 1;
-        int secondValueToEnqueue = 2;
-        this.circularQueueUnderTest.enqueue(firstValueToEnqueue);
-        this.circularQueueUnderTest.enqueue(secondValueToEnqueue);
+        int firstValue = 1;
+        int secondValue = 2;
+        this.circularQueueUnderTest.enqueue(firstValue);
+        this.circularQueueUnderTest.enqueue(secondValue);
         int previousSize = this.circularQueueUnderTest.size();
-        assertEquals(Optional.of(firstValueToEnqueue), this.circularQueueUnderTest.peek());
+        assertEquals(Optional.of(firstValue), this.circularQueueUnderTest.peek());
         assertEquals(previousSize, this.circularQueueUnderTest.size());
     }
 
     @Test
     void testDequeueShouldReturnsTheLastElementDequeuedRemovingIt() {
-        int firstValueToDequeue = 1;
-        int secondValueToDequeue = 2;
-        this.circularQueueUnderTest.enqueue(firstValueToDequeue);
-        this.circularQueueUnderTest.enqueue(secondValueToDequeue);
+        int firstValue = 1;
+        int secondValue = 2;
+        this.circularQueueUnderTest.enqueue(firstValue);
+        this.circularQueueUnderTest.enqueue(secondValue);
         int previousSize = this.circularQueueUnderTest.size();
-        assertEquals(Optional.of(firstValueToDequeue), this.circularQueueUnderTest.dequeue());
+        assertEquals(Optional.of(firstValue), this.circularQueueUnderTest.dequeue());
         assertEquals(previousSize - 1, this.circularQueueUnderTest.size());
     }
 
@@ -88,8 +88,8 @@ public class CircularListTest {
     void testEnqueuingShouldOverwriteTheElderElementIfFull() {
         fillTheQueue();
         int expectedFirst = 1;
-        int newElement = 10;
-        this.circularQueueUnderTest.enqueue(newElement);
+        int newValue = 10;
+        this.circularQueueUnderTest.enqueue(newValue);
         assertEquals(Optional.of(expectedFirst), this.circularQueueUnderTest.peek());
     }
 
@@ -106,18 +106,15 @@ public class CircularListTest {
         fillTheQueue();
         int newValue = CAPACITY;
         this.circularQueueUnderTest.enqueue(newValue);
-        for (int i = 0; i < CAPACITY - 1; i++) {
-            this.circularQueueUnderTest.dequeue();
-        }
+        dequeueElements(CAPACITY - 1);
         assertEquals(Optional.of(newValue), this.circularQueueUnderTest.peek());
     }
 
     @Test
     void testShouldBeEmptyAfterQueueingAllElements() {
         fillTheQueue();
-        for (int i = 0; i < CAPACITY; i++) {
-            this.circularQueueUnderTest.dequeue();
-        }
+        dequeueElements(CAPACITY);
+        assertEquals(0, this.circularQueueUnderTest.size());
         assertTrue(this.circularQueueUnderTest.isEmpty());
         assertEquals(Optional.empty(), this.circularQueueUnderTest.peek());
         assertEquals(Optional.empty(), this.circularQueueUnderTest.dequeue());
@@ -140,6 +137,12 @@ public class CircularListTest {
     private void fillTheQueue() {
         for (int i = 0; i < CAPACITY; i++) {
             this.circularQueueUnderTest.enqueue(i);
+        }
+    }
+
+    private void dequeueElements(int numOfElementsToRemove) {
+        for (int i = 0; i < numOfElementsToRemove; i++) {
+            this.circularQueueUnderTest.dequeue();
         }
     }
 }
