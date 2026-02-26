@@ -129,4 +129,10 @@ public class CircularListTest {
         this.circularQueueUnderTest.enqueue(newValue);
         assertEquals(CAPACITY, this.circularQueueUnderTest.size());
     }
+
+    @Test
+    void testSizeShouldNotBeNegative() {
+        this.circularQueueUnderTest.dequeue();
+        assertEquals(0, this.circularQueueUnderTest.size());
+    }
 }
