@@ -72,4 +72,12 @@ public class CircularListTest {
         assertEquals(Optional.of(firstValueToDequeue), this.circularQueueUnderTest.dequeue());
         assertEquals(previousSize - 1, this.circularQueueUnderTest.size());
     }
+
+    @Test
+    void testShouldBeFullAfterReachingCapacity() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
+        assertTrue(this.circularQueueUnderTest.isFull());
+    }
 }

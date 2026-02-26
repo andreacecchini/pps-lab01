@@ -24,6 +24,12 @@ public interface CircularQueue {
 
     /**
      *
+     * @return whether the queue has reach the capacity.
+     */
+    boolean isFull();
+
+    /**
+     *
      * @return the number of elements inside the queue.
      */
     int size();

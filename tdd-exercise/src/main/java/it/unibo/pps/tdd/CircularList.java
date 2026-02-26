@@ -20,6 +20,11 @@ public class CircularList implements CircularQueue {
     }
 
     @Override
+    public boolean isFull() {
+        return true;
+    }
+
+    @Override
     public int size() {
         return this.buffer.size();
     }
