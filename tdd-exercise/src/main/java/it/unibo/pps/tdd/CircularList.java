@@ -1,5 +1,7 @@
 package it.unibo.pps.tdd;
 
+import java.util.Optional;
+
 public class CircularList implements CircularQueue {
     final int capacity;
 
@@ -20,5 +22,10 @@ public class CircularList implements CircularQueue {
     @Override
     public int getCapacity() {
         return this.capacity;
+    }
+
+    @Override
+    public Optional<Integer> peek() {
+        return Optional.empty();
     }
 }

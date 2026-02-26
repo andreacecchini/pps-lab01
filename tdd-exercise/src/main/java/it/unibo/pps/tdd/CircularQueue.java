@@ -1,5 +1,7 @@
 package it.unibo.pps.tdd;
 
+import java.util.Optional;
+
 /**
  *  Task 3 - TDD for Circular Queue
  *  A simple CircularQueue that stores integers with a **fixed** capacity.
@@ -31,4 +33,11 @@ public interface CircularQueue {
      * @return the queue capacity.
      */
     int getCapacity();
+
+    /**
+     * Retrieves, but does not remove, the first element of the queue.
+     *
+     * @return an {@link Optional} containing the first element, if present.
+     */
+    Optional<Integer> peek();
 }
