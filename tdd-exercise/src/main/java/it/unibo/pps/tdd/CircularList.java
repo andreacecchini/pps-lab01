@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A {@link CircularQueue} implementation based on {@link List}.
+ */
 public class CircularList implements CircularQueue {
     final List<Integer> buffer;
     int front = 0;
