@@ -50,10 +50,11 @@ public class CircularListTest {
     @Test
     void testPeekShouldReturnsTheLastElementEnqueuedWithoutRemovingIt() {
         int firstValueToEnqueue = 1;
-        int secondValueToEnqueue = 1;
+        int secondValueToEnqueue = 2;
         this.circularQueueUnderTest.enqueue(firstValueToEnqueue);
+        this.circularQueueUnderTest.enqueue(secondValueToEnqueue);
         int previousSize = this.circularQueueUnderTest.size();
-        assertEquals(Optional.of(secondValueToEnqueue), this.circularQueueUnderTest.peek());
+        assertEquals(Optional.of(firstValueToEnqueue), this.circularQueueUnderTest.peek());
         assertEquals(previousSize, this.circularQueueUnderTest.size());
     }
 }
