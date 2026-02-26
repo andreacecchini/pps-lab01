@@ -51,11 +51,9 @@ public class CircularList implements CircularQueue {
     @Override
     public void enqueue(int valueToEnqueue) {
         if (isFull()) {
-            this.buffer.set(this.rear, valueToEnqueue);
-            nextFront();
+            overwriteFront(valueToEnqueue);
         } else {
-            this.buffer.addLast(valueToEnqueue);
-            this.size++;
+            append(valueToEnqueue);
         }
         nextRear();
     }
@@ -63,15 +61,29 @@ public class CircularList implements CircularQueue {
     @Override
     public Optional<Integer> dequeue() {
         try {
-            final var firstOfTheQueue = Optional.ofNullable(this.buffer.set(this.front, null));
-            if (firstOfTheQueue.isPresent()) {
+            final var previousFirst = removeAndRetrieveIfPresent();
+            if (previousFirst.isPresent()) {
                 this.size--;
                 nextFront();
             }
-            return firstOfTheQueue;
+            return previousFirst;
         } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
+    }
+
+    private Optional<Integer> removeAndRetrieveIfPresent() {
+        return Optional.ofNullable(this.buffer.set(this.front, null));
+    }
+
+    private void overwriteFront(int valueToEnqueue) {
+        this.buffer.set(this.rear, valueToEnqueue);
+        nextFront();
+    }
+
+    private void append(int valueToEnqueue) {
+        this.buffer.addLast(valueToEnqueue);
+        this.size++;
     }
 
     private void nextFront() {
