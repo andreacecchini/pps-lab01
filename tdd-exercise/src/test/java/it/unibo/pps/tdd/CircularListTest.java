@@ -108,6 +108,19 @@ public class CircularListTest {
     }
 
     @Test
+    void testNewElementShouldBeLastIfOverwritesElder() {
+        for (int i = 0; i < CAPACITY; i++) {
+            this.circularQueueUnderTest.enqueue(i);
+        }
+        int newValue = CAPACITY;
+        this.circularQueueUnderTest.enqueue(newValue);
+        for (int i = 0; i < CAPACITY - 1; i++) {
+            this.circularQueueUnderTest.dequeue();
+        }
+        assertEquals(Optional.of(newValue), this.circularQueueUnderTest.peek());
+    }
+
+    @Test
     void testShouldBeEmptyAfterQueueingAllElements() {
         for (int i = 0; i < CAPACITY; i++) {
             this.circularQueueUnderTest.enqueue(i);
