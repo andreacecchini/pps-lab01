@@ -3,14 +3,10 @@ package it.unibo.pps.tdd;
 /**
  * A basic {@link SmartDoorLock} lock with no pin validation and maximum attempts.
  */
-final class BasicSmartDoorLock implements SmartDoorLock {
+public final class BasicSmartDoorLock implements SmartDoorLock {
     private SmartDoorState state = SmartDoorState.UNLOCKED;
     private boolean isPinSet = false;
     private int pin;
-
-    BasicSmartDoorLock() {
-
-    }
 
     @Override
     public void setPin(int pin) {

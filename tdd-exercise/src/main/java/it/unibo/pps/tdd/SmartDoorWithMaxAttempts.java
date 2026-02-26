@@ -4,7 +4,7 @@ package it.unibo.pps.tdd;
  * A {@link SmartDoorLockDecorator} for a {@link SmartDoorLock} that adds
  * a maximum number of attempts.
  */
-final class SmartDoorWithMaxAttempts extends SmartDoorLockDecorator {
+public final class SmartDoorWithMaxAttempts extends SmartDoorLockDecorator {
     private boolean isBlocked = false;
     private int numberOfAttempts = 0;
     private final int maxNumberOfAttempts;

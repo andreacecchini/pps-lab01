@@ -1,6 +1,6 @@
 package it.unibo.pps.tdd;
 
-abstract class SmartDoorLockDecorator implements SmartDoorLock {
+public abstract class SmartDoorLockDecorator implements SmartDoorLock {
     protected SmartDoorLock decorated;
 
     public SmartDoorLockDecorator(SmartDoorLock decorated) {
