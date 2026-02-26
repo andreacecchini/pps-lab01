@@ -45,6 +45,10 @@ public class CircularList implements CircularQueue {
 
     @Override
     public Optional<Integer> dequeue() {
-        return Optional.empty();
+        try {
+            return Optional.ofNullable(this.buffer.removeFirst());
+        } catch (NoSuchElementException e) {
+            return Optional.empty();
+        }
     }
 }

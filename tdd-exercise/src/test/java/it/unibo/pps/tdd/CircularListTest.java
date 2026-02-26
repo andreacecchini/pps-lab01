@@ -61,4 +61,15 @@ public class CircularListTest {
         assertEquals(Optional.of(firstValueToEnqueue), this.circularQueueUnderTest.peek());
         assertEquals(previousSize, this.circularQueueUnderTest.size());
     }
+
+    @Test
+    void testDequeueShouldReturnsTheLastElementDequeuedRemovingIt() {
+        int firstValueToDequeue = 1;
+        int secondValueToDequeue = 2;
+        this.circularQueueUnderTest.enqueue(firstValueToDequeue);
+        this.circularQueueUnderTest.enqueue(secondValueToDequeue);
+        int previousSize = this.circularQueueUnderTest.size();
+        assertEquals(Optional.of(firstValueToDequeue), this.circularQueueUnderTest.dequeue());
+        assertEquals(previousSize - 1, this.circularQueueUnderTest.size());
+    }
 }
